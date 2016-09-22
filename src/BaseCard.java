@@ -1,19 +1,18 @@
 
 public class BaseCard {
-    private enum CardType{TRUNP, PLAY};
-    private CardType cardType;
+    private String cardType;
     private String cardName;
     private String fileName;
     private String imageName;
 
-    public BaseCard(CardType type, String name, String fileName, String imageName){
+    public BaseCard(String type, String name, String fileName, String imageName){
         this.cardType=type;
         this.cardName=name;
         this.fileName=fileName;
         this.imageName=imageName;
     }
 
-    public CardType getCardType() {
+    public String getCardType() {
         return cardType;
     }
 

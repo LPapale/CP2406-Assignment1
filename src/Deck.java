@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -8,27 +7,27 @@ import java.util.Random;
  */
 public class Deck {
     private final int numberOfCards=60;
-    private List<BaseCard> deck=new ArrayList<>(numberOfCards);
+    private ArrayList<BaseCard> deck=new ArrayList<>(numberOfCards);
 
-    Deck{
-        deck=DeckBuilder.newDeck;
+    public Deck(){
+
     }
 
     public void shuffleDeck(){
-        Random rand=new Random(System.nanoTime());
-        Collections.shuffle(deck, rand);
+        Random randomSeed=new Random(System.nanoTime());
+        Collections.shuffle(deck, randomSeed);
     }
- public BaseCard[] getHand(){
-     BaseCard[] hand=new BaseCard[8];
+ public ArrayList dealHand(){
+     ArrayList<BaseCard> hand=new ArrayList<>(8);
      for(int i=0;i<8;i++){
-         hand[i]=deck.get(0);
+         hand.add(deck.get(0));
          deck.remove(0);
      }
      return hand;
  }
 
- public BaseCard getCard(){
-     BaseCard card=new BaseCard;
+ public BaseCard dealCard(){
+     BaseCard card;
      card=deck.get(0);
      deck.remove(0);
      return card;

@@ -9,8 +9,8 @@ public class Deck {
     private final int numberOfCards=60;
     private ArrayList<BaseCard> deck=new ArrayList<>(numberOfCards);
 
-    public Deck(){
-
+    public Deck(ArrayList<BaseCard> deck){
+        this.deck=deck;
     }
 
     public void shuffleDeck(){

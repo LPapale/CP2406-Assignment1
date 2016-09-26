@@ -13,6 +13,7 @@ public class Game {
         if (inputReader.getMenuChoice()==1){
             //Start new game
             System.out.println("Starting new game");
+            SuperTrumpGame superTrumpGame=new SuperTrumpGame(name);
         }
 
     }

@@ -10,12 +10,13 @@ public class PlayCard extends BaseCard {
     private String cleavage;
     private String economicValue;
     private String specificGravity;
+    private String crystalSystem;
     private double highestHardness;
     private double highestSpecificGravity;
 
 
 
-    PlayCard(String name, String fileName, String imageName, String chemicalFormula, String classification, String occurrence, String crustalAbundance, String hardness, String cleavage, String economicValue, String specificGravity) {
+    PlayCard(String name, String fileName, String imageName, String chemicalFormula, String classification, String occurrence, String crustalAbundance, String hardness, String cleavage, String economicValue, String specificGravity, String crystalSystem) {
         super("Play", name, fileName, imageName);
         this.hardness=hardness;
         this.chemicalFormula=chemicalFormula;
@@ -26,6 +27,8 @@ public class PlayCard extends BaseCard {
         this.cleavage=cleavage;
         this.economicValue=economicValue;
         this.specificGravity=specificGravity;
+        this.crystalSystem=crystalSystem;
+
         String[] hardnessRange=hardness.split("-");
         highestHardness=Double.parseDouble(hardnessRange[hardnessRange.length-1]);
 
@@ -74,8 +77,12 @@ public class PlayCard extends BaseCard {
         return occurrence;
     }
 
+    public String getCrystalSystem() {
+        return crystalSystem;
+    }
+
     public static void main(String[] args) {
-        PlayCard card = new PlayCard("me", "nowhere.txt", "noimsge.png", "SGit", "none", "nj", "mff", "5-8", "jsdafbds", "lkfdsjb", "5-9");
+        PlayCard card = new PlayCard("me", "nowhere.txt", "noimsge.png", "SGit", "none", "nj", "mff", "5-8", "jsdafbds", "lkfdsjb", "5-9", "lol");
         System.out.println("Card name is: " + card.getCardName());
         System.out.println("Card type is: " + card.getCardTitle());
         System.out.println("Card hardness is: " + card.getHardness());

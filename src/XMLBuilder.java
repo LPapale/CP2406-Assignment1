@@ -7,10 +7,12 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class XMLBuilder {
-    final int NUMBEROFCARDS = 60;
-    ArrayList<BaseCard> deck=new ArrayList<>();
+
+   private ArrayList<BaseCard> deck=new ArrayList<>();
 
     public XMLBuilder() {
+        final int NUMBEROFCARDS = 60;
+        String hardness="";
         try {
             File inputFile = new File("MstCards_151021.plist");
             DocumentBuilderFactory dbFactory
@@ -44,11 +46,23 @@ public class XMLBuilder {
                         occurrence = occurrence + " " + stringList.item(6 + occ).getTextContent();
                     }
                     // add fields after occurrence
-                    String hardness = stringList.item(6 + occurrences).getTextContent();
+                    String hardnessInput = stringList.item(6 + occurrences).getTextContent();
                     String specificGravity = stringList.item(7 + occurrences).getTextContent();
                     String cleavage = stringList.item(8 + occurrences).getTextContent();
                     String crustleAbundance = stringList.item(9 + occurrences).getTextContent();
                     String economicValue = stringList.item(10 + occurrences).getTextContent();
+                    // Check hardness input format
+                        // Check for single number or "-" separator
+                    if((hardnessInput.matches("[0-9]*\\.?[0-9]+-[0-9]*\\.?[0-9]+"))|(hardnessInput.matches("[0-9]*\\.?[0-9]+"))){
+                        hardness=hardnessInput;
+                        // Check for " " separator
+                    }else if(hardnessInput.matches("[0-9]*\\.?[0-9]+ [0-9]*\\.?[0-9]+")){
+                        String[] hardnessRange=hardnessInput.split(" ");
+                        hardness=String.format("%.1f-%.1f", Double.parseDouble(hardnessRange[0]) , Double.parseDouble(hardnessRange[1]));
+                    }
+
+
+
                     deck.add(new PlayCard(title, fileName, imageName, chemistry, classification, occurrence, crustleAbundance, hardness, cleavage, economicValue,specificGravity, crystalSystem));
                 } else if (keyList.item(3).getTextContent().equals("trump")) {
                     String fileName = stringList.item(0).getTextContent();
@@ -65,7 +79,7 @@ public class XMLBuilder {
             e.printStackTrace();
         }
         // Check for the correct number of cards
-        if(deck.size()==NUMBEROFCARDS){
+        if(deck.size()!=NUMBEROFCARDS){
             System.out.println("Something went wrong: Unexpected number of cards in the deck!\nThe number of cards in the deck is "+ deck.size());
         }
 

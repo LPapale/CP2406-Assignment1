@@ -1,23 +1,23 @@
 
 public class BaseCard {
+    private String cardType;
     private String cardTitle;
-    private String cardName;
     private String fileName;
     private String imageName;
 
-    public BaseCard(String title, String name, String fileName, String imageName){
+    public BaseCard(String type, String title, String fileName, String imageName){
+        this.cardType=type;
         this.cardTitle=title;
-        this.cardName=name;
         this.fileName=fileName;
         this.imageName=imageName;
     }
 
-    public String getCardTitle() {
-        return cardTitle;
+    public String getCardType() {
+        return cardType;
     }
 
-    public String getCardName() {
-        return cardName;
+    public String getCardTitle() {
+        return cardTitle;
     }
 
     public String getFileName() {

@@ -17,7 +17,7 @@ public class Deck {
         Random randomSeed=new Random(System.nanoTime());
         Collections.shuffle(deck, randomSeed);
     }
- public ArrayList dealHand(){
+ public ArrayList<BaseCard> dealHand(){
      ArrayList<BaseCard> hand=new ArrayList<>(8);
      for(int i=0;i<8;i++){
          hand.add(deck.get(0));

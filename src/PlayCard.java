@@ -16,8 +16,8 @@ public class PlayCard extends BaseCard {
 
 
 
-    PlayCard(String name, String fileName, String imageName, String chemicalFormula, String classification, String occurrence, String crustalAbundance, String hardness, String cleavage, String economicValue, String specificGravity, String crystalSystem) {
-        super("Play", name, fileName, imageName);
+    PlayCard(String title, String fileName, String imageName, String chemicalFormula, String classification, String occurrence, String crustalAbundance, String hardness, String cleavage, String economicValue, String specificGravity, String crystalSystem) {
+        super("Play", title, fileName, imageName);
         this.hardness=hardness;
         this.chemicalFormula=chemicalFormula;
         this.classification = classification;
@@ -81,10 +81,22 @@ public class PlayCard extends BaseCard {
         return crystalSystem;
     }
 
+    public int getCleavageIndex(){
+        return TrumpCategoryArrays.getCleavageArray().indexOf(cleavage);
+    }
+
+    public int getCrustalAbundenceIndex(){
+        return TrumpCategoryArrays.getCrustalAbundanceArray().indexOf(crustalAbundance);
+    }
+
+    public int getEconomicValueIndex(){
+        return TrumpCategoryArrays.getEconomicValeArray().indexOf(economicValue);
+    }
+
     public static void main(String[] args) {
         PlayCard card = new PlayCard("me", "nowhere.txt", "noimsge.png", "SGit", "none", "nj", "mff", "5-8", "jsdafbds", "lkfdsjb", "5-9", "lol");
-        System.out.println("Card name is: " + card.getCardName());
-        System.out.println("Card type is: " + card.getCardTitle());
+        System.out.println("Card name is: " + card.getCardTitle());
+        System.out.println("Card type is: " + card.getCardType());
         System.out.println("Card hardness is: " + card.getHardness());
         System.out.println("Highest Card hardness is: " + card.getHighestHardness());
         System.out.println("Card specific gravity is: " + card.getSpecificGravity());

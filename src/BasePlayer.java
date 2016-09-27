@@ -10,9 +10,12 @@ public abstract class BasePlayer {
     private String type;
     private String name;
 
+
     public BasePlayer(String name, String type){
         this.name=name;
         this.type=type;
+
+
     }
     protected ArrayList<BaseCard> hand=new ArrayList<>();
 
@@ -40,5 +43,9 @@ public abstract class BasePlayer {
         return type;
     }
 
-    public abstract BaseCard playCard(String trumpCategory, String currentValue);
+    public abstract BaseCard playCard(String trumpCategory, BaseCard card);
+
+    public abstract BaseCard playCard(String trumpCategory);
+
+    public abstract String pickTrumpCategory();
 }

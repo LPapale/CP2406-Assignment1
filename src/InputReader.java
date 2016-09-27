@@ -1,4 +1,4 @@
-import com.sun.corba.se.impl.io.TypeMismatchException;
+
 
 import java.util.Scanner;
 
@@ -21,5 +21,27 @@ public class InputReader {
         return name;
     }
 
+    public int getNumberOfPlayers(){
+        int numberOfPlayers=0;
+        String input;
+        boolean validChoice=false;
+
+        while (!validChoice) {
+            System.out.println("Please enter the number of players>>");
+            input = scanner.next();
+            if (input.matches("^\\d$")){
+                int number=Integer.parseInt(input);
+                if((number>=3)&&(number<=5)){
+                    numberOfPlayers=number;
+                    validChoice=true;
+                }else {
+                    System.out.println("The allowed number of players is between 3 and 5 inclusive.");
+                }
+            }else {
+                System.out.println("You must enter an integer");
+            }
+        }
+        return numberOfPlayers;
+    }
 
 }

@@ -93,19 +93,11 @@ public class PlayCard extends BaseCard {
         return TrumpCategoryArrays.getEconomicValeArray().indexOf(economicValue);
     }
 
-    public static void main(String[] args) {
-        PlayCard card = new PlayCard("me", "nowhere.txt", "noimsge.png", "SGit", "none", "nj", "mff", "5-8", "jsdafbds", "lkfdsjb", "5-9", "lol");
-        System.out.println("Card name is: " + card.getCardTitle());
-        System.out.println("Card type is: " + card.getCardType());
-        System.out.println("Card hardness is: " + card.getHardness());
-        System.out.println("Highest Card hardness is: " + card.getHighestHardness());
-        System.out.println("Card specific gravity is: " + card.getSpecificGravity());
-        System.out.println("Card highest specific gravity is: " + card.getHighestSpecificGravity());
-        System.out.println("Card chemical formula is: " + card.getChemicalFormula());
-        System.out.println("Card classification: " + card.getClassification());
-        System.out.println("Card crustal abundance: " + card.getCrustalAbundance());
-        System.out.println("Card economic value is: " + card.getEconomicValue());
-        System.out.println("Card cleavage: " + card.getCleavage());
-        System.out.println("Card occurrence: " + card.getOccurrence());
+    @Override
+    public String getCardDetails() {
+        return getCardTitle()+", Chemistry " + getChemicalFormula() + ", Classification " + getClassification() +
+                ", Crystal system "+getCrystalSystem()+", Occurrence"+getOccurrence()+", hardness"+ getHardness()+
+                ", Specific gravity"+getSpecificGravity()+", cleavage"+getCleavage()+", Crustal abundance"+
+                getCrustalAbundenceIndex()+", Economic value"+ getEconomicValue();
     }
 }

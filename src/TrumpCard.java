@@ -11,4 +11,9 @@ public class TrumpCard extends BaseCard {
     public String getSubtitle() {
         return subtitle;
     }
+
+    @Override
+    public String getCardDetails() {
+        return getCardTitle()+", Trump category "+getSubtitle();
+    }
 }

@@ -1,5 +1,5 @@
 
-public class BaseCard {
+public abstract class BaseCard {
     private String cardType;
     private String cardTitle;
     private String fileName;
@@ -27,4 +27,6 @@ public class BaseCard {
     public String getImageName() {
         return imageName;
     }
+
+    public abstract String getCardDetails();
 }

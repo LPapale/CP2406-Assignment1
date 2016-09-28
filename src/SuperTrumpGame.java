@@ -16,7 +16,8 @@ public class SuperTrumpGame {
     public SuperTrumpGame(String name){
         Random random=new Random(System.nanoTime());
         //Get the number of players
-        int numberOfPlayers=inputReader.getNumberOfPlayers();
+        //int numberOfPlayers=inputReader.getNumberOfPlayers();
+        int numberOfPlayers=4;
         ArrayList<String> winners=new ArrayList<>();
         // Create players
         players=new BasePlayer[numberOfPlayers];
@@ -58,31 +59,39 @@ public class SuperTrumpGame {
         while(!gameFinished){
             playerID++;
             BasePlayer player=players[playerID];
+
+
             if(player.isActive()&!player.isFinished()) {
+                if(numberOfActivePlayers()<=1){
+                    trumpCategory= players[playerID].pickTrumpCategory();
+                    System.out.println("Trump category is "+trumpCategory);
+                    activateAllPlayers();
+                    currentCard=null;
+                }
+
                 play(player);
 
-            if(player.getHandSize()==0){
-                System.out.println("****************"+player.getName()+" Finished**************");
-                player.finish();
-                winners.add(player.getName());
-            }
-            // if the number of active players is 1 the player must pick another trump category
-            if(numberOfActivePlayers()<=1){
-                trumpCategory= players[playerID].pickTrumpCategory();
-                System.out.println("Trump category is "+trumpCategory);
-                activateAllPlayers();
-                currentCard=null;
-            }
-                if(winners.size()==numberOfPlayers-1){
-                    gameFinished=true;
-                    System.out.println("Game over!");
-                    System.out.println("The winner is "+winners.get(0));
-                    System.out.println("Second place goes to "+winners.get(1));
-
+                if (player.getHandSize() == 0) {
+                    System.out.println("****************" + player.getName() + " Finished**************");
+                    player.finish();
+                    winners.add(player.getName());
                 }
 
 
             }
+            // if the number of active players is 1 the player must pick another trump category
+
+            if(winners.size()==(numberOfPlayers-1)){
+                    gameFinished=true;
+                    System.out.println("Game over!");
+                    System.out.println("The winner is "+winners.get(0));
+                    //System.out.println("Second place goes to "+winners.get(1));
+
+            }
+
+
+
+
         if(playerID==numberOfPlayers-1){
             playerID=-1;
         }
@@ -139,13 +148,13 @@ public class SuperTrumpGame {
     }
 
     private int numberOfActivePlayers(){
-         int numberOActivePlayers=0;
+         int numberOfActivePlayers=0;
         for(BasePlayer player:players){
-            if(player.isActive()){
-                numberOActivePlayers++;
+            if(player.isActive()&!player.isFinished()){
+                numberOfActivePlayers++;
             }
         }
-        return numberOActivePlayers;
+        return numberOfActivePlayers;
     }
 
 }

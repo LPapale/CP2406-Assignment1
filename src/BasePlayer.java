@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public abstract class BasePlayer {
     private String type;
     private String name;
+    private boolean active;
+    private boolean finished=false;
 
 
     public BasePlayer(String name, String type){
@@ -43,6 +45,25 @@ public abstract class BasePlayer {
         return type;
     }
 
+    public boolean isActive(){
+        return active;
+    }
+
+    public boolean isFinished(){
+        return finished;
+    }
+
+    public void activate(){
+        active=true;
+    }
+
+    public void deactivate(){
+        active=false;
+    }
+
+    public void finish() {
+        finished=true;
+    }
     public abstract BaseCard playCard(String trumpCategory, BaseCard card);
 
     public abstract BaseCard playCard(String trumpCategory);

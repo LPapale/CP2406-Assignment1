@@ -22,7 +22,7 @@ public class AIPlayer extends BasePlayer {
                     double hardnessToBeat= lastPlayCard.getHighestHardness();
                     cardIndex=chooseHardnessCard(hardnessToBeat);
                     break;
-                case "Specific Gravity":
+                case "Specific gravity":
                     double specificGravityToBeat = lastPlayCard.getHighestSpecificGravity();
                     cardIndex=chooseSpecificGravityCard(specificGravityToBeat);
                     break;
@@ -30,11 +30,11 @@ public class AIPlayer extends BasePlayer {
                     int cleavageToBeat = lastPlayCard.getCleavageIndex();
                     cardIndex=chooseCleavageCard(cleavageToBeat);
                     break;
-                case "Crustal Abundance":
+                case "Crustal abundance":
                     int crustalAbundanceToBeat = lastPlayCard.getCleavageIndex();
                     cardIndex=chooseCrustalAbundanceCard(crustalAbundanceToBeat);
                     break;
-                case "Economic Value":
+                case "Economic value":
                     int economicValueToBeat = lastPlayCard.getCleavageIndex();
                     cardIndex=chooseEconomicValueCard(economicValueToBeat);
                     break;
@@ -46,10 +46,12 @@ public class AIPlayer extends BasePlayer {
 
         if (cardIndex != -1) {
             cardToPlay = hand.get(cardIndex);
+            hand.remove(cardIndex);
         } else {
             cardIndex=chooseTrumpCard();
             if (cardIndex != -1) {
                 cardToPlay = hand.get(cardIndex);
+                hand.remove(cardIndex);
             } else {
                 cardToPlay=null;
             }
@@ -66,26 +68,28 @@ public class AIPlayer extends BasePlayer {
             case "Hardness":
                 cardIndex=chooseHardnessCard(0);
                 break;
-            case "Specific Gravity":
+            case "Specific gravity":
                 cardIndex=chooseSpecificGravityCard(0);
                 break;
             case "Cleavage":
                 cardIndex=chooseCleavageCard(-1);
                 break;
-            case "Crustal Abundance":
+            case "Crustal abundance":
                 cardIndex=chooseCrustalAbundanceCard(-1);
                 break;
-            case "Economic Value":
+            case "Economic value":
                 cardIndex=chooseEconomicValueCard(-1);
                 break;
         }
 
         if (cardIndex != -1) {
             cardToPlay = hand.get(cardIndex);
+            hand.remove(cardIndex);
         } else {
             cardIndex=chooseTrumpCard();
             if (cardIndex != -1) {
                 cardToPlay = hand.get(cardIndex);
+                hand.remove(cardIndex);
             } else {
                 cardToPlay=null;
             }
@@ -99,7 +103,7 @@ public class AIPlayer extends BasePlayer {
     public String pickTrumpCategory() {
         ArrayList<String> trumpCategories= TrumpCategoryArrays.getTrumpCategoriesArray();
         Random random=new Random();
-        int index=random.nextInt(trumpCategories.size())-1;
+        int index=random.nextInt(trumpCategories.size());
         return trumpCategories.get(index);
     }
 

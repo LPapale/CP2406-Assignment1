@@ -176,9 +176,9 @@ public class AIPlayer extends BasePlayer {
             if (card.getCardType().equals("Play")) {
                 PlayCard currentPlayCard = (PlayCard) card;
 
-                if ((currentPlayCard.getCrustalAbundenceIndex() > crustalAbundanceToBeat) & (currentPlayCard.getCrustalAbundenceIndex() < lowestPlayableCrustalAbundance)) {
+                if ((currentPlayCard.getCrustalAbundanceIndex() > crustalAbundanceToBeat) & (currentPlayCard.getCrustalAbundanceIndex() < lowestPlayableCrustalAbundance)) {
                     cardIndex = currentCardIndex;
-                    lowestPlayableCrustalAbundance = currentPlayCard.getCrustalAbundenceIndex();
+                    lowestPlayableCrustalAbundance = currentPlayCard.getCrustalAbundanceIndex();
                 }
 
             }
@@ -198,7 +198,7 @@ public class AIPlayer extends BasePlayer {
 
                 if ((currentPlayCard.getEconomicValueIndex() > economicValueToBeat) & (currentPlayCard.getEconomicValueIndex() < lowestPlayableEconomicValue)) {
                     cardIndex = currentCardIndex;
-                    lowestPlayableEconomicValue = currentPlayCard.getCrustalAbundenceIndex();
+                    lowestPlayableEconomicValue = currentPlayCard.getCrustalAbundanceIndex();
                 }
             }
         }

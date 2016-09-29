@@ -29,4 +29,6 @@ public abstract class BaseCard {
     }
 
     public abstract String getCardDetails();
+
+    public abstract String getCategoryDetails(String trumpCategory);
 }

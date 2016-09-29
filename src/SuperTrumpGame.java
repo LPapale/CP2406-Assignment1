@@ -16,16 +16,16 @@ public class SuperTrumpGame {
     public SuperTrumpGame(String name){
         Random random=new Random(System.nanoTime());
         //Get the number of players
-        //int numberOfPlayers=inputReader.getNumberOfPlayers();
-        int numberOfPlayers=4;
+        int numberOfPlayers=inputReader.getNumberOfPlayers();
+
         ArrayList<String> winners=new ArrayList<>();
         // Create players
         players=new BasePlayer[numberOfPlayers];
         // Create human player
-       // players[0]=new HumanPlayer(name);
+        players[0]=new HumanPlayer(name);
         // Create AIPlayer
-        for(int i=0; i<numberOfPlayers;i++){// Change to 1 for human player
-            players[i]=new AIPlayer(aINames[i]);
+        for(int i=1; i<(numberOfPlayers);i++){
+            players[i]=new AIPlayer(aINames[i-1]);
         }
         // activate all players
         activateAllPlayers();
@@ -42,17 +42,19 @@ public class SuperTrumpGame {
         boolean gameFinished=false;
         int firstPlayer=random.nextInt(numberOfPlayers);
         int playerID=firstPlayer;
+        System.out.println(players[playerID].getName()+" plays first");
         trumpCategory= players[playerID].pickTrumpCategory();
         System.out.println("Trump category is "+trumpCategory);
         currentCard= players[playerID].playCard(trumpCategory);
-        // make sure a card was played
 
+        /* make sure a card was played
         while(currentCard==null){
             playerID++;
             BasePlayer player=players[playerID];
             currentCard= players[playerID].playCard(trumpCategory);
-        }
-        System.out.println(players[playerID].getName()+" Played "+ currentCard.getCardTitle());
+        }*/
+        System.out.println(players[playerID].getName()+" Played "+ currentCard.getCardTitle()+".");
+        System.out.println(currentCard.getCategoryDetails(trumpCategory)+".\n");
         if(playerID==numberOfPlayers-1){
             playerID=-1;
         }
@@ -62,6 +64,7 @@ public class SuperTrumpGame {
 
 
             if(player.isActive()&!player.isFinished()) {
+                // If player is the last active player pick
                 if(numberOfActivePlayers()<=1){
                     trumpCategory= players[playerID].pickTrumpCategory();
                     System.out.println("Trump category is "+trumpCategory);
@@ -77,15 +80,18 @@ public class SuperTrumpGame {
                     winners.add(player.getName());
                 }
 
-
             }
-            // if the number of active players is 1 the player must pick another trump category
+
 
             if(winners.size()==(numberOfPlayers-1)){
                     gameFinished=true;
                     System.out.println("Game over!");
                     System.out.println("The winner is "+winners.get(0));
-                    //System.out.println("Second place goes to "+winners.get(1));
+                    System.out.println("2nd place goes to "+winners.get(1));
+                    System.out.println("3rd place goes to "+winners.get(2));
+                    for(int i=4;i<winners.size();i++){
+                        System.out.println(""+(i-1)+"th place goes to "+winners.get(i));
+                    }
 
             }
 
@@ -115,12 +121,13 @@ public class SuperTrumpGame {
                     player.setCard(deck.dealCard());
                 }
                 player.deactivate();
-                System.out.println(player.getName() + " passed.");
+                System.out.println(player.getName() + " passed.\n");
             } else if (newCard.getCardType().equals("Trump")) {
                 // Activate all payers
                 activateAllPlayers();
                 // Print played card
-                System.out.println(player.getName() + " played " + newCard.getCardTitle());
+                System.out.println(player.getName() + " played " + newCard.getCardTitle()+".");
+
                 // set trump category
                 if (newCard.getCardTitle().equals("The Geologist")) {
                     trumpCategory = player.pickTrumpCategory();
@@ -129,13 +136,17 @@ public class SuperTrumpGame {
                 }
                 System.out.println("Trump Category is now " + trumpCategory);
 
+
                 // Set current card as new card
                 currentCard = newCard;
+                System.out.println(currentCard.getCategoryDetails(trumpCategory)+".\n");
                 // replay
                 play(player);
             } else {
-                System.out.println(player.getName() + " played " + newCard.getCardTitle());
+                System.out.println(player.getName() + " played " + newCard.getCardTitle()+".");
+
                 currentCard = newCard;
+                System.out.println(currentCard.getCategoryDetails(trumpCategory)+".\n");
             }
 
         }

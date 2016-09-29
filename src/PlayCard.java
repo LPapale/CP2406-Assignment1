@@ -85,7 +85,7 @@ public class PlayCard extends BaseCard {
         return TrumpCategoryArrays.getCleavageArray().indexOf(cleavage);
     }
 
-    public int getCrustalAbundenceIndex(){
+    public int getCrustalAbundanceIndex(){
         return TrumpCategoryArrays.getCrustalAbundanceArray().indexOf(crustalAbundance);
     }
 
@@ -95,9 +95,32 @@ public class PlayCard extends BaseCard {
 
     @Override
     public String getCardDetails() {
-        return getCardTitle()+", Chemistry " + getChemicalFormula() + ", Classification " + getClassification() +
-                ", Crystal system "+getCrystalSystem()+", Occurrence"+getOccurrence()+", hardness"+ getHardness()+
-                ", Specific gravity"+getSpecificGravity()+", cleavage"+getCleavage()+", Crustal abundance"+
-                getCrustalAbundenceIndex()+", Economic value"+ getEconomicValue();
+        return "Name: "+getCardTitle()+", Hardness "+ getHardness()+ ", Specific gravity "+getSpecificGravity()+
+                ", cleavage "+getCleavage()+", Crustal abundance "+ getCrustalAbundance()+", Economic value "+
+                getEconomicValue()+",\n Chemistry " + getChemicalFormula() + ", Classification " + getClassification() +
+                ", Crystal system "+getCrystalSystem()+", Occurrence "+getOccurrence();
+    }
+
+    @Override
+    public String getCategoryDetails(String trumpCategory) {
+        String data="";
+        switch (trumpCategory){
+            case "Hardness":
+                data="Hardness: "+getHardness();
+                break;
+            case "Specific gravity":
+                data="Specific gravity: "+getSpecificGravity();
+                break;
+            case "Cleavage":
+                data="Cleavage: "+getCleavage();
+                break;
+            case "Crustal abundance":
+                data="Crustal abundance: "+getCrustalAbundance();
+                break;
+            case "Economic value":
+                data="Economic value: "+getEconomicValue();
+                break;
+        }
+        return "Name: "+getCardTitle()+", "+data;
     }
 }

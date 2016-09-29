@@ -7,7 +7,8 @@ public class TrumpCategoryArrays {
 
     public static ArrayList<String> getCleavageArray(){
         ArrayList<String> cleavages=new ArrayList<>();
-        String[] cleavageList={"none","poor/none", "1 poor", "2 poor", "1 good", "1 good, 1 poor", "2 good", "3 good", "1 perfect", "1 perfect, 1 good", "1 perfect, 2 good"};
+        String[] cleavageList={"none","poor/none", "1 poor", "2 poor", "1 good", "1 good, 1 poor", "2 good", "3 good",
+                "1 perfect", "1 perfect, 1 good", "1 perfect, 2 good", "3 perfect", "4 perfect", "6 perfect"};
 
     for(String val:cleavageList){
         cleavages.add(val);

@@ -1,4 +1,3 @@
-
 public abstract class BaseCard {
     private String cardType;
     private String cardTitle;

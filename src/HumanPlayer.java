@@ -1,13 +1,10 @@
-import java.util.ArrayList;
-
 /**
  * Created by Admin on 23/09/2016.
  */
 public class HumanPlayer extends BasePlayer{
-    InputReader inputReader=new InputReader();
+    private InputReader inputReader=new InputReader();
     public HumanPlayer(String name){
         super(name, "Human");
-
     }
 @Override
 public BaseCard playCard(String trumpCategory, BaseCard lastCard){
@@ -21,6 +18,7 @@ public BaseCard playCard(String trumpCategory, BaseCard lastCard){
 
     System.out.println("Please pick a card:");
     printHand();
+    System.out.println("Or enter "+(hand.size()+1)+" to pass.\n");
     while (!validChoice){
 
         choice=inputReader.getMenuChoice(1,hand.size()+1);
@@ -49,9 +47,15 @@ public BaseCard playCard(String trumpCategory, BaseCard lastCard){
         System.out.println("The current trump category is "+trumpCategory+".\n");
         System.out.println("Please pick a card:");
         printHand();
-        choice=inputReader.getMenuChoice(1,hand.size());
+        System.out.println("Enter "+(hand.size()+1)+" to pass.");
+        choice=inputReader.getMenuChoice(1,hand.size()+1);
+        if(choice==hand.size()+1){
+            cardToPlay=null;
+        }else{
         cardToPlay = hand.get(choice - 1);
         hand.remove(choice-1);
+        }
+
 
         return cardToPlay;
     }

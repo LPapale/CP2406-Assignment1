@@ -12,6 +12,12 @@ public class AIPlayer extends BasePlayer {
 
     @Override
     public BaseCard playCard(String trumpCategory, BaseCard lastCard) {
+       try{
+        Thread.sleep(1000);}
+        catch (InterruptedException e){
+            // Continue
+        }
+
         int cardIndex = -1;
         BaseCard cardToPlay;
         if (lastCard.getCardType().equals("Play")) {
@@ -31,11 +37,11 @@ public class AIPlayer extends BasePlayer {
                     cardIndex=chooseCleavageCard(cleavageToBeat);
                     break;
                 case "Crustal abundance":
-                    int crustalAbundanceToBeat = lastPlayCard.getCleavageIndex();
+                    int crustalAbundanceToBeat = lastPlayCard.getCrustalAbundanceIndex();
                     cardIndex=chooseCrustalAbundanceCard(crustalAbundanceToBeat);
                     break;
                 case "Economic value":
-                    int economicValueToBeat = lastPlayCard.getCleavageIndex();
+                    int economicValueToBeat = lastPlayCard.getEconomicValueIndex();
                     cardIndex=chooseEconomicValueCard(economicValueToBeat);
                     break;
             }

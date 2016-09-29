@@ -47,12 +47,12 @@ public class SuperTrumpGame {
         System.out.println("Trump category is "+trumpCategory);
         currentCard= players[playerID].playCard(trumpCategory);
 
-        /* make sure a card was played
+        // make sure a card was played
         while(currentCard==null){
             playerID++;
             BasePlayer player=players[playerID];
             currentCard= players[playerID].playCard(trumpCategory);
-        }*/
+        }
         System.out.println(players[playerID].getName()+" Played "+ currentCard.getCardTitle()+".");
         System.out.println(currentCard.getCategoryDetails(trumpCategory)+".\n");
         if(playerID==numberOfPlayers-1){
@@ -88,7 +88,9 @@ public class SuperTrumpGame {
                     System.out.println("Game over!");
                     System.out.println("The winner is "+winners.get(0));
                     System.out.println("2nd place goes to "+winners.get(1));
-                    System.out.println("3rd place goes to "+winners.get(2));
+                if(winners.size()>2) {
+                    System.out.println("3rd place goes to " + winners.get(2));
+                }
                     for(int i=4;i<winners.size();i++){
                         System.out.println(""+(i-1)+"th place goes to "+winners.get(i));
                     }
@@ -134,19 +136,29 @@ public class SuperTrumpGame {
                 } else {
                     trumpCategory = ((TrumpCard) newCard).getSubtitle();
                 }
+                System.out.println(newCard.getCategoryDetails(trumpCategory)+".\n");
                 System.out.println("Trump Category is now " + trumpCategory);
+
+
+
+
 
 
                 // Set current card as new card
                 currentCard = newCard;
-                System.out.println(currentCard.getCategoryDetails(trumpCategory)+".\n");
+
                 // replay
                 play(player);
             } else {
                 System.out.println(player.getName() + " played " + newCard.getCardTitle()+".");
-
+                System.out.println(newCard.getCategoryDetails(trumpCategory)+".\n");
+                if(currentCard!=null){
+                if(currentCard.getCardTitle().equals("The Geophysicist")&newCard.getCardTitle().equals("Magnetite")){
+                    System.out.println(player.getName()+" played the round winning combination!");
+                    activateAllPlayers();
+                    play(player);
+                }}
                 currentCard = newCard;
-                System.out.println(currentCard.getCategoryDetails(trumpCategory)+".\n");
             }
 
         }

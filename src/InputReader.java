@@ -1,9 +1,7 @@
-
-
 import java.util.Scanner;
 
 /**
- * Created by Admin on 24/09/2016.
+ * This class handles menu choice selection and error handling
  */
 public class InputReader {
     Scanner scanner=new Scanner(System.in);
@@ -22,10 +20,10 @@ public class InputReader {
                     menuChoice=number;
                     validChoice=true;
                 }else {
-                    System.out.println("The allowed menu choice is between "+min+ " and "+max+" inclusive");
+                    System.out.println("The allowed menu choice is between "+min+ " and "+max+" inclusive.");
                 }
             }else {
-                System.out.println("You must enter an integer");
+                System.out.println("You must enter an integer!");
             }
         }
         return menuChoice;

@@ -1,10 +1,7 @@
 import java.util.ArrayList;
-
-
 /**
- * Created by Admin on 23/09/2016.
+ * This class creates all the basic functionality of a player
  */
-
 
 public abstract class BasePlayer {
     private String type;
@@ -12,18 +9,12 @@ public abstract class BasePlayer {
     private boolean active;
     private boolean finished=false;
 
-
     public BasePlayer(String name, String type){
         this.name=name;
         this.type=type;
-
-
     }
+
     protected ArrayList<BaseCard> hand=new ArrayList<>();
-
-    public BasePlayer(String type){
-        this.type=type;
-    }
 
     public void setHand(ArrayList<BaseCard> hand){
         this.hand = hand;
@@ -64,6 +55,7 @@ public abstract class BasePlayer {
     public void finish() {
         finished=true;
     }
+
     public abstract BaseCard playCard(String trumpCategory, BaseCard card);
 
     public abstract BaseCard playCard(String trumpCategory);

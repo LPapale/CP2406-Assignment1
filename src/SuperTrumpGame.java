@@ -15,21 +15,25 @@ public class SuperTrumpGame {
     private ArrayList<String> aINames=new ArrayList<>(Arrays.asList(aINamesList));
     private Deck deck;
     private BasePlayer[] players;
+    private Random random= new Random(System.nanoTime());
+    private ArrayList<String> winners = new ArrayList<>();
+    private int numberOfPlayers;
 
-    public SuperTrumpGame(String name){
-        Random random=new Random(System.nanoTime());
-        ArrayList<String> winners=new ArrayList<>();
-        boolean gameFinished=false;
-        int firstPlayer;
-        int playerID;
+    public SuperTrumpGame(String name) {
         //Get the number of players
-        int numberOfPlayers=inputReader.getNumberOfPlayers();
+        numberOfPlayers = inputReader.getNumberOfPlayers();
         // Create players
-        players=new BasePlayer[numberOfPlayers];
+        players = new BasePlayer[numberOfPlayers];
         // Create human player
-        players[0]=new HumanPlayer(name);
+        players[0] = new HumanPlayer(name);
 
-        // Create AIPlayer
+    }
+
+       public void startNewGame(){
+           boolean gameFinished = false;
+           int firstPlayer;
+           int playerID;
+           // Create AIPlayer
         Collections.shuffle(aINames,random);
         System.out.println("The AI players are:");
         for(int i=1; i<(numberOfPlayers);i++){

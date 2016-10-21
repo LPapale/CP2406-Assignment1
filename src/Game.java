@@ -7,13 +7,15 @@ public class Game {
         // Greet player
         System.out.println("Hello!");
         String name = inputReader.getPlayerName();
+        SuperTrumpGame superTrumpGame=new SuperTrumpGame(name);
         System.out.println("Nice to meet you " + name);
         System.out.println("What would you like to do?");
         showMenu();
         if (inputReader.getMenuChoice(1,2)==1){
             //Start new game
             System.out.println("Starting new game");
-            SuperTrumpGame superTrumpGame=new SuperTrumpGame(name);
+            superTrumpGame.startNewGame();
+
         }else{
             System.out.println("Exiting game");
         }

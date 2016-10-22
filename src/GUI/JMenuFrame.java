@@ -28,14 +28,15 @@ public class JMenuFrame extends JFrame{
         add(numberOfPlayersLabel);
         add(numberOfPlayers);
         add(newGameButton);
-        //newGameButton.addActionListener(newGameListener);
+        newGameButton.addActionListener(GUISuperTrumpGame.NewGameActionListener);
     }
 
-
-    public static void main(String[] arguments)
-    {
-        JMenuFrame cframe = new JMenuFrame();
-        cframe.setSize(350,150);
-        cframe.setVisible(true);
+    public int getNumberOfPlayers(){
+        return (int) numberOfPlayers.getSelectedItem();
     }
+
+    public String getPlayerName(){
+        return nameField.getText();
+    }
+
 }

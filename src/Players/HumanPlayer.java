@@ -6,6 +6,8 @@ import Cards.TrumpCard;
 import Cards.TrumpCategoryArrays;
 import Game.InputReader;
 
+import java.util.ArrayList;
+
 
 /**
  * This class implements the functionality of a human player including playing and picking a trump category.
@@ -168,4 +170,5 @@ public BaseCard playCard(String trumpCategory, BaseCard lastCard){
         System.out.println("2. Pass");
         System.out.println("3. Quit");
     }
+
 }

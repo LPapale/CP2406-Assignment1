@@ -65,4 +65,8 @@ public abstract class BasePlayer {
     public abstract BaseCard playCard(String trumpCategory);
 
     public abstract String pickTrumpCategory();
+
+    public ArrayList<BaseCard> getHand() {
+        return hand;
+    }
 }

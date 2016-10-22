@@ -1,3 +1,13 @@
+package Game;
+
+import Cards.BaseCard;
+import Cards.TrumpCard;
+import Deck.Deck;
+import Players.AIPlayer;
+import Players.BasePlayer;
+import Players.HumanPlayer;
+import Deck.XMLBuilder;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,7 +43,7 @@ public class SuperTrumpGame {
            boolean gameFinished = false;
            int firstPlayer;
            int playerID;
-           // Create AIPlayer
+           // Create Players.AIPlayer
         Collections.shuffle(aINames,random);
         System.out.println("The AI players are:");
         for(int i=1; i<(numberOfPlayers);i++){
@@ -120,7 +130,7 @@ public class SuperTrumpGame {
             if(winners.size()==(numberOfPlayers-1)){
                 gameFinished=true;
                 // Display winners
-                System.out.println("Game over!");
+                System.out.println("Game.Game over!");
                 System.out.println("The winner is "+winners.get(0));
                 System.out.println("2nd place goes to "+winners.get(1));
                 if(winners.size()>2) {

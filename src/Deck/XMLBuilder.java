@@ -1,6 +1,7 @@
-/**
+package Deck; /**
  * Created by Admin on 26/09/2016.
  */
+import Cards.*;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;

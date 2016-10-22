@@ -1,3 +1,7 @@
+package Cards;
+
+import Cards.BaseCard;
+
 /**
  * Created by Admin on 23/09/2016.
  */

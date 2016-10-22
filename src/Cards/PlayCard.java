@@ -1,3 +1,7 @@
+package Cards;
+
+import Cards.BaseCard;
+
 /**
  * Created by Admin on 21/09/2016.
  */
@@ -16,7 +20,7 @@ public class PlayCard extends BaseCard {
 
 
 
-    PlayCard(String title, String fileName, String imageName, String chemicalFormula, String classification, String occurrence, String crustalAbundance, String hardness, String cleavage, String economicValue, String specificGravity, String crystalSystem) {
+    public PlayCard(String title, String fileName, String imageName, String chemicalFormula, String classification, String occurrence, String crustalAbundance, String hardness, String cleavage, String economicValue, String specificGravity, String crystalSystem) {
         super("Play", title, fileName, imageName);
         this.hardness=hardness;
         this.chemicalFormula=chemicalFormula;

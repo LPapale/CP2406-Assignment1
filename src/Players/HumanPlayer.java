@@ -1,7 +1,16 @@
+package Players;
+
+import Cards.BaseCard;
+import Cards.PlayCard;
+import Cards.TrumpCard;
+import Cards.TrumpCategoryArrays;
+import Game.InputReader;
+
+
 /**
  * This class implements the functionality of a human player including playing and picking a trump category.
  */
-public class HumanPlayer extends BasePlayer{
+public class HumanPlayer extends BasePlayer {
     private InputReader inputReader=new InputReader();
     public HumanPlayer(String name){
         super(name, "Human");
@@ -97,12 +106,12 @@ public BaseCard playCard(String trumpCategory, BaseCard lastCard){
         int i=0;
         int choice;
         String trumpCategory;
-        for(String category:TrumpCategoryArrays.getTrumpCategoriesArray()){
+        for(String category: TrumpCategoryArrays.getTrumpCategoriesArray()){
             i++;
             System.out.println(""+i+". "+category);
         }
-        choice=inputReader.getMenuChoice(1,TrumpCategoryArrays.getTrumpCategoriesArray().size());
-        trumpCategory=TrumpCategoryArrays.getTrumpCategoriesArray().get(choice-1);
+        choice=inputReader.getMenuChoice(1, TrumpCategoryArrays.getTrumpCategoriesArray().size());
+        trumpCategory= TrumpCategoryArrays.getTrumpCategoriesArray().get(choice-1);
         return trumpCategory;
     }
 

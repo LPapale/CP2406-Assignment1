@@ -1,3 +1,7 @@
+package Players;
+
+import Cards.BaseCard;
+
 import java.util.ArrayList;
 /**
  * This class creates all the basic functionality of a player

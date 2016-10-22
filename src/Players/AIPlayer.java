@@ -1,5 +1,10 @@
+package Players;
+
 import java.util.ArrayList;
 import java.util.Random;
+import Cards.BaseCard;
+import Cards.PlayCard;
+import Cards.TrumpCategoryArrays;
 
 /**
  * This class implements the functionality of an AI player including playing and picking a trump category.

@@ -1,3 +1,5 @@
+package Game;
+
 /**
  * This class greets the user gets their name and starts a new game
  */

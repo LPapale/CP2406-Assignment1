@@ -2,6 +2,7 @@ package Deck; /**
  * Created by Admin on 26/09/2016.
  */
 import Cards.*;
+
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.*;
@@ -99,8 +100,6 @@ public class XMLBuilder {
         if(deck.size()!=NUMBEROFCARDS){
             System.out.println("Something went wrong: Unexpected number of cards in the deck!\nThe number of cards in the deck is "+ deck.size());
         }
-
-
     }
 
     public ArrayList<BaseCard> getDeck() {

@@ -3,10 +3,8 @@ package Players;
 import Cards.BaseCard;
 import Cards.PlayCard;
 import Cards.TrumpCard;
-import Cards.TrumpCategoryArrays;
+import Game.TrumpCategoryArrays;
 import Game.InputReader;
-
-import java.util.ArrayList;
 
 
 /**

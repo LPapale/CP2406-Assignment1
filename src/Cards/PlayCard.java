@@ -1,6 +1,6 @@
 package Cards;
 
-import Cards.BaseCard;
+import Game.TrumpCategoryArrays;
 
 /**
  * Created by Admin on 21/09/2016.

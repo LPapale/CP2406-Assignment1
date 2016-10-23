@@ -12,10 +12,12 @@ public class JAIPlayerPanel extends JPanel{
     JLabel stateLabel=new JLabel();
     JLabel label=new JLabel();
     JAIPlayerPanel(){
+        setSize(200,200);
         setLayout(grid);
         add(nameLabel);
         add(stateLabel);
         add(label);
+        setBackground(Color.CYAN);
     }
 
     public void setName(String name){

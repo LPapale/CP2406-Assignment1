@@ -6,8 +6,6 @@ import Deck.*;
 import Players.AIPlayer;
 import Players.BasePlayer;
 import Players.GUIHumanPlayer;
-import Players.HumanPlayer;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -312,6 +310,9 @@ public class GUISuperTrumpGame {
 
             if(numberOfActivePlayers()<=1){
                 System.out.println(players[0].getName()+" won the round!");
+                if(playerID>0){
+                    game.playersPanel.setPlayerLabel(playerID - 1, "Won the round!");
+                }
                 activateAllPlayers();
                 currentCard=null;
                 //Update current card panel
@@ -388,6 +389,8 @@ public class GUISuperTrumpGame {
                     // Get first card
                     currentCard = players[firstPlayer].playCard(trumpCategory);
                     System.out.println(players[playerID].getName() + " Played " + currentCard.getCardTitle() + ".");
+                    game.playersPanel.setPlayerLabel(playerID-1,"Played " + currentCard.getCardTitle());
+
                     System.out.println(currentCard.getCategoryDetails(trumpCategory) + ".\n");
                     // Set next player
                     playerID++;
@@ -448,6 +451,7 @@ public class GUISuperTrumpGame {
                 activateAllPlayers();
                 // Print played card
                 System.out.println(player.getName() + " played " + newCard.getCardTitle()+".");
+                game.playersPanel.setPlayerLabel(playerID-1,"Played " + newCard.getCardTitle());
                 // set trump category
                 if (newCard.getCardTitle().equals("The Geologist")) {
                     trumpCategory = player.pickTrumpCategory();
@@ -467,11 +471,13 @@ public class GUISuperTrumpGame {
                 play(player);
             } else {
                 System.out.println(player.getName() + " played " + newCard.getCardTitle()+".");
+                game.playersPanel.setPlayerLabel(playerID-1,"Played " + newCard.getCardTitle());
                 System.out.println(newCard.getCategoryDetails(trumpCategory)+".\n");
                 // Check if round winning combination was played
                 if(currentCard!=null){
                     if(currentCard.getCardTitle().equals("The Geophysicist")&newCard.getCardTitle().equals("Magnetite")){
                         System.out.println(player.getName()+" played the round winning combination!");
+                        game.playersPanel.setPlayerLabel(playerID-1,"Played the round winning combination!");
                         activateAllPlayers();
                         // Player restarts new round
                         play(player);

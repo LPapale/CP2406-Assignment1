@@ -9,7 +9,7 @@ import java.awt.*;
 public class JPlayersPanel extends JPanel{
     JAIPlayerPanel[] playerPanels;
     JPlayersPanel(int numberOfPlayers){
-        GridLayout grid=new GridLayout(1,numberOfPlayers);
+        GridLayout grid=new GridLayout(1,numberOfPlayers,5,5);
         setLayout(grid);
         setSize(new Dimension(1000,200));
         playerPanels=new JAIPlayerPanel[numberOfPlayers];
@@ -28,6 +28,6 @@ public class JPlayersPanel extends JPanel{
     }
 
     public void setPlayerLabel(int player, String label){
-        playerPanels[player].setState(label);
+        playerPanels[player].setLabel(label);
     }
 }

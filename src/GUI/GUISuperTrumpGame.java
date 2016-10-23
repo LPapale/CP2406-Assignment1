@@ -5,7 +5,7 @@ import Cards.TrumpCard;
 import Deck.*;
 import Players.AIPlayer;
 import Players.BasePlayer;
-import Players.HumanPlayer;
+import Players.GUIHumanPlayer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -65,6 +65,7 @@ public class GUISuperTrumpGame {
         @Override
         public void actionPerformed(ActionEvent e) {
             trumpCategory=trumpDialog.getTrumpCategory();
+            currentCard=null;
             System.out.println("Player set Trump category to "+trumpCategory);
             trumpDialog.setVisible(false);
             handMouseListener.setEnabled(true);
@@ -75,9 +76,26 @@ public class GUISuperTrumpGame {
 
         @Override
         public void mouseClicked(MouseEvent e) {
+            GUIHumanPlayer humanPlayer=(GUIHumanPlayer) players[0];
             if(isEnabled()) {
                 JLabel cardClicked = (JLabel) e.getSource();
-                System.out.println(cardClicked.getName() + " says Steph is cute");
+                String cardName=cardClicked.getName();
+                System.out.println(cardName + " was clicked");
+                BaseCard card= humanPlayer.getCardFromHand(cardName);
+                if(currentCard==null){
+                    humanPlayer.removeFromHand(cardName);
+                    currentCard=card;
+                }else if(humanPlayer.validCard(trumpCategory,currentCard,card)){
+                    if(card.getCardType().equals("Play")){
+                        setEnabled(false);}
+                    currentCard=card;
+                    humanPlayer.removeFromHand(cardName);
+                }else{
+                    System.out.println("Not a valid card");
+                }
+                game.handPnl.addHand(humanPlayer.getHand());
+
+                ((GUIHumanPlayer) players[0]).printHand();
             }
         }
 
@@ -97,7 +115,7 @@ public class GUISuperTrumpGame {
         // Create players
         players = new BasePlayer[numberOfPlayers];
         // Create human player
-        players[0] = new HumanPlayer(humanPlayerName);
+        players[0] = new GUIHumanPlayer(humanPlayerName);
 
         boolean gameFinished = false;
         int firstPlayer;
@@ -131,7 +149,7 @@ public class GUISuperTrumpGame {
         }
         // Show human play their hand
         System.out.println("The cards in your hand are:");
-        ((HumanPlayer)players[0]).printHand();
+        ((GUIHumanPlayer)players[0]).printHand();
         // Pause
 
         game.addPlayerHand(players[0].getHand());
@@ -168,6 +186,7 @@ public class GUISuperTrumpGame {
                     playerID=0;
                 }
             }
+            handMouseListener.setEnabled(true);
         }else{
             // Get trump category from player
             trumpDialog.setVisible(true);

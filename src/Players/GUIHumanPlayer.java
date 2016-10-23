@@ -53,7 +53,12 @@ public class GUIHumanPlayer extends BasePlayer{
     public void removeFromHand(String cardName){
         int cardIndex=getCardIndex(cardName);
         hand.remove(cardIndex);
+    }
 
+    public BaseCard getCardFromHand(String cardName){
+        int cardIndex=getCardIndex(cardName);
+        BaseCard card=hand.get(cardIndex);
+        return card;
     }
 
     private int getCardIndex(String cardName){
@@ -66,6 +71,14 @@ public class GUIHumanPlayer extends BasePlayer{
             }
         }
         return index;
+    }
+
+    public void printHand(){
+        int i=0;
+        for(BaseCard card:hand){
+            i++;
+            System.out.println(""+i+"."+card.getCardDetails()+".\n");
+        }
     }
 
     @Override

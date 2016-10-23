@@ -34,6 +34,11 @@ public class GUISuperTrumpGame {
     private static JGameFrame game;
     private static JChooseTrumpDialog trumpDialog;
     private static String humanPlayerName;
+    private static boolean turnFinished=false;
+
+    private static boolean gameFinished = false;
+    private static int firstPlayer;
+    private static int playerID;
 
     public static void main(String[] args){
         menu=new JMenuFrame();
@@ -77,7 +82,8 @@ public class GUISuperTrumpGame {
         @Override
         public void mouseClicked(MouseEvent e) {
             GUIHumanPlayer humanPlayer=(GUIHumanPlayer) players[0];
-            if(isEnabled()) {
+            if(isEnabled()&humanPlayer.isActive()&!humanPlayer.isFinished()) {
+                turnFinished=false;
                 JLabel cardClicked = (JLabel) e.getSource();
                 String cardName=cardClicked.getName();
                 System.out.println(cardName + " was clicked");
@@ -85,17 +91,35 @@ public class GUISuperTrumpGame {
                 if(currentCard==null){
                     humanPlayer.removeFromHand(cardName);
                     currentCard=card;
+                    if(card.getCardType().equals("Play")){
+                        setEnabled(false);
+                        turnFinished=true;
+                    }
                 }else if(humanPlayer.validCard(trumpCategory,currentCard,card)){
                     if(card.getCardType().equals("Play")){
-                        setEnabled(false);}
+                        setEnabled(false);
+                        turnFinished=true;
+                    }
                     currentCard=card;
                     humanPlayer.removeFromHand(cardName);
                 }else{
                     System.out.println("Not a valid card");
                 }
+                // Update hand panel
                 game.handPnl.addHand(humanPlayer.getHand());
-
+                game.validate();
+                game.repaint();
                 ((GUIHumanPlayer) players[0]).printHand();
+
+                if (humanPlayer.getHandSize() == 0) {
+                    System.out.println("****************" + humanPlayer.getName() + " Finished**************");
+                    humanPlayer.finish();
+                    winners.add(humanPlayer.getName());
+                }
+
+                if(turnFinished){
+                    AIPlay();
+                }
             }
         }
 
@@ -110,6 +134,61 @@ public class GUISuperTrumpGame {
         }
     };
 
+    private static void AIPlay() {
+        playerID++;
+        if(playerID==numberOfPlayers){
+            playerID=0;
+        }
+        //Play while next player is an AIPlayer
+        while (playerID!=0){
+
+            BasePlayer player=players[playerID];
+            if(player.isActive()&!player.isFinished()) {
+                // Check if player is the last active player
+                if(numberOfActivePlayers()<=1){
+                    System.out.println(player.getName()+" won the round!");
+                    // Get trump category from player
+                    trumpCategory= players[playerID].pickTrumpCategory();
+                    System.out.println("Trump category is "+trumpCategory);
+                    activateAllPlayers();
+                    currentCard=null;
+                }
+                // Player takes turn
+                play(player);
+                // Check if player has finished
+                if (player.getHandSize() == 0) {
+                    System.out.println("****************" + player.getName() + " Finished**************");
+                    player.finish();
+                    winners.add(player.getName());
+                }
+            }
+
+            // Check if game is finished
+            if(winners.size()==(numberOfPlayers-1)){
+                gameFinished=true;
+                // Display winners
+                System.out.println("Game.Game over!");
+                System.out.println("The winner is "+winners.get(0));
+                System.out.println("2nd place goes to "+winners.get(1));
+                if(winners.size()>2) {
+                    System.out.println("3rd place goes to " + winners.get(2));
+                }
+                for(int i=3;i<winners.size();i++){
+                    System.out.println(""+(i-1)+"th place goes to "+winners.get(i));
+                }
+            }
+
+
+
+            playerID++;
+            if(playerID==numberOfPlayers){
+                playerID=0;
+            }
+        }
+        handMouseListener.setEnabled(true);
+
+    }
+
 
     private static void startNewGame(){
         // Create players
@@ -117,9 +196,6 @@ public class GUISuperTrumpGame {
         // Create human player
         players[0] = new GUIHumanPlayer(humanPlayerName);
 
-        boolean gameFinished = false;
-        int firstPlayer;
-        int playerID;
         // Create Players.AIPlayer
         Collections.shuffle(aINames,random);
         System.out.println("The AI players are:");
@@ -194,6 +270,7 @@ public class GUISuperTrumpGame {
     }
 
     private static void play(BasePlayer player){
+        System.out.println("in play function");
         // Only play if player has cards remaining.
         if(player.getHandSize()>0) {
             // Get players card
@@ -249,6 +326,8 @@ public class GUISuperTrumpGame {
             }
         }
     }
+
+
 
 
     private static void activateAllPlayers(){

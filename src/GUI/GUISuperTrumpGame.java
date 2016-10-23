@@ -88,6 +88,7 @@ public class GUISuperTrumpGame {
         @Override
         public void actionPerformed(ActionEvent e) {
             trumpCategory=trumpDialog.getTrumpCategory();
+            game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
             currentCard=null;
             System.out.println("Player set Trump category to "+trumpCategory);
             trumpDialog.setVisible(false);
@@ -110,10 +111,11 @@ public class GUISuperTrumpGame {
                         // Get trump category from player
                         trumpCategory = players[playerID].pickTrumpCategory();
                         System.out.println("Trump category is " + trumpCategory);
+                        game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
                         activateAllPlayers();
                         currentCard = null;
                         //Update current card panel
-                        game.currentCardPnl.updateCurrentCard(currentCard);
+                        game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                         game.validate();
                         game.repaint();
                         trumpDialog.setVisible(true);
@@ -137,6 +139,7 @@ public class GUISuperTrumpGame {
                                     trumpDialog.setVisible(true);
                                 } else {
                                     trumpCategory = ((TrumpCard) card).getSubtitle();
+                                    game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
                                     System.out.println("Trump cat set to " + trumpCategory);
                                 }
                             }
@@ -151,6 +154,7 @@ public class GUISuperTrumpGame {
                                     trumpDialog.setVisible(true);
                                 } else {
                                     trumpCategory = ((TrumpCard) card).getSubtitle();
+                                    game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
                                     System.out.println("Trump cat set to " + trumpCategory);
                                 }
                             }
@@ -160,7 +164,7 @@ public class GUISuperTrumpGame {
                             System.out.println("Not a valid card");
                         }
                         //Update current card panel
-                        game.currentCardPnl.updateCurrentCard(currentCard);
+                        game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                         // Update hand panel
                         game.handPnl.addHand(humanPlayer.getHand());
                         game.validate();
@@ -220,7 +224,7 @@ public class GUISuperTrumpGame {
                             players[0].setCard(deck.dealCard());
                         }
                         if (deck.length() == 0) {
-                            game.deckPnl.clear();
+                            game.cardPnl.deckPnl.clear();
                         }
                         players[0].deactivate();
                         handMouseListener.setEnabled(false);
@@ -260,10 +264,11 @@ public class GUISuperTrumpGame {
                     // Get trump category from player
                     trumpCategory= players[playerID].pickTrumpCategory();
                     System.out.println("Trump category is "+trumpCategory);
+                    game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
                     activateAllPlayers();
                     currentCard=null;
                     //Update current card panel
-                    game.currentCardPnl.updateCurrentCard(currentCard);
+                    game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                     game.validate();
                     game.repaint();
                 }
@@ -292,7 +297,7 @@ public class GUISuperTrumpGame {
                     System.out.println(""+(i-1)+"th place goes to "+winners.get(i));
                 }
             }
-            
+
             playerID++;
             if(playerID==numberOfPlayers& players[0].isActive()&!players[0].isFinished()){
                 playerID=0;
@@ -308,7 +313,7 @@ public class GUISuperTrumpGame {
                 activateAllPlayers();
                 currentCard=null;
                 //Update current card panel
-                game.currentCardPnl.updateCurrentCard(currentCard);
+                game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                 game.validate();
                 game.repaint();
                 trumpDialog.setVisible(true);
@@ -376,6 +381,7 @@ public class GUISuperTrumpGame {
                     // Get trump category from first player
                     trumpCategory = players[firstPlayer].pickTrumpCategory();
                     System.out.println("Trump category is " + trumpCategory);
+                    game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
                     // Get first card
                     currentCard = players[firstPlayer].playCard(trumpCategory);
                     System.out.println(players[playerID].getName() + " Played " + currentCard.getCardTitle() + ".");
@@ -394,7 +400,7 @@ public class GUISuperTrumpGame {
                         }
                     }
                     //Update current card panel
-                    game.currentCardPnl.updateCurrentCard(currentCard);
+                    game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                     game.validate();
                     game.repaint();
                     handMouseListener.setEnabled(true);
@@ -428,7 +434,7 @@ public class GUISuperTrumpGame {
                     player.setCard(deck.dealCard());
                 }
                 if(deck.length()==0){
-                    game.deckPnl.clear();
+                    game.cardPnl.deckPnl.clear();
                 }
                 player.deactivate();
                 System.out.println(player.getName() + " passed.\n");
@@ -445,10 +451,11 @@ public class GUISuperTrumpGame {
                 }
                 System.out.println(newCard.getCategoryDetails(trumpCategory)+".\n");
                 System.out.println("Trump Category is now " + trumpCategory);
+                game.cardPnl.trumpCategoryLabel.setText(trumpCategory);
                 // Set current card as new card
                 currentCard = newCard;
                 //Update current card panel
-                game.currentCardPnl.updateCurrentCard(currentCard);
+                game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                 game.validate();
                 game.repaint();
                 // replay since trump card was played
@@ -467,7 +474,7 @@ public class GUISuperTrumpGame {
                 }
                 currentCard = newCard;
                 //Update current card panel
-                game.currentCardPnl.updateCurrentCard(currentCard);
+                game.cardPnl.currentCardPnl.updateCurrentCard(currentCard);
                 game.validate();
                 game.repaint();
             }

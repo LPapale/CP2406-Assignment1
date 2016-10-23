@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,6 +40,7 @@ public class GUISuperTrumpGame {
     private static boolean gameFinished = false;
     private static int firstPlayer;
     private static int playerID;
+
 
     public static void main(String[] args){
         menu=new JMenuFrame();
@@ -77,6 +79,7 @@ public class GUISuperTrumpGame {
         }
     };
 
+
     public static NewMouseListener handMouseListener=new NewMouseListener() {
 
         @Override
@@ -105,6 +108,8 @@ public class GUISuperTrumpGame {
                 }else{
                     System.out.println("Not a valid card");
                 }
+                //Update current card panel
+                game.currentCardPnl.updateCurrentCard(currentCard);
                 // Update hand panel
                 game.handPnl.addHand(humanPlayer.getHand());
                 game.validate();
@@ -115,6 +120,22 @@ public class GUISuperTrumpGame {
                     System.out.println("****************" + humanPlayer.getName() + " Finished**************");
                     humanPlayer.finish();
                     winners.add(humanPlayer.getName());
+                }
+
+
+                // Check if game is finished
+                if(winners.size()==(numberOfPlayers-1)){
+                    gameFinished=true;
+                    // Display winners
+                    System.out.println("Game.Game over!");
+                    System.out.println("The winner is "+winners.get(0));
+                    System.out.println("2nd place goes to "+winners.get(1));
+                    if(winners.size()>2) {
+                        System.out.println("3rd place goes to " + winners.get(2));
+                    }
+                    for(int i=3;i<winners.size();i++){
+                        System.out.println(""+(i-1)+"th place goes to "+winners.get(i));
+                    }
                 }
 
                 if(turnFinished){
@@ -152,6 +173,10 @@ public class GUISuperTrumpGame {
                     System.out.println("Trump category is "+trumpCategory);
                     activateAllPlayers();
                     currentCard=null;
+                    //Update current card panel
+                    game.currentCardPnl.updateCurrentCard(currentCard);
+                    game.validate();
+                    game.repaint();
                 }
                 // Player takes turn
                 play(player);
@@ -308,6 +333,10 @@ public class GUISuperTrumpGame {
                 System.out.println("Trump Category is now " + trumpCategory);
                 // Set current card as new card
                 currentCard = newCard;
+                //Update current card panel
+                game.currentCardPnl.updateCurrentCard(currentCard);
+                game.validate();
+                game.repaint();
                 // replay since trump card was played
                 play(player);
             } else {
@@ -323,6 +352,10 @@ public class GUISuperTrumpGame {
                     }
                 }
                 currentCard = newCard;
+                //Update current card panel
+                game.currentCardPnl.updateCurrentCard(currentCard);
+                game.validate();
+                game.repaint();
             }
         }
     }

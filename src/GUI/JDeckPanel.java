@@ -25,11 +25,15 @@ public class JDeckPanel extends JPanel {
 
     public void clear(){
         removeAll();
-        JLabel cardLabel=new JLabel();
+        setSize(200,300);
+        image= new ImageIcon("src\\GUI\\images\\Slide66.jpg");
+        // Scale card image
+        scaledImage=image.getImage().getScaledInstance(200,300, Image.SCALE_DEFAULT);
+        cardImage=new ImageIcon(scaledImage);
+        // Create card label
+        JLabel cardLabel=new JLabel(cardImage);
         add(cardLabel);
         cardLabel.addMouseListener(GUISuperTrumpGame.deckMouseListener);
-        cardLabel.setBackground(Color.BLUE);
-
     }
 
     public static void main(String[] args) {

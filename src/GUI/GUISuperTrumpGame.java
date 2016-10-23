@@ -60,10 +60,11 @@ public class GUISuperTrumpGame {
             System.out.println("Number of players is: "+numberOfPlayers);
             System.out.println("Human player name is: "+humanPlayerName);
             menu.setVisible(false);
-            game=new JGameFrame();
+            game=new JGameFrame(numberOfPlayers-1);
             trumpDialog=new JChooseTrumpDialog();
             trumpDialog.setVisible(false);
             handMouseListener.setEnabled(false);
+            deckMouseListener.setEnabled(false);
             game.setVisible(true);
             startNewGame();
         }
@@ -278,6 +279,7 @@ public class GUISuperTrumpGame {
                 if (player.getHandSize() == 0) {
                     System.out.println("****************" + player.getName() + " Finished**************");
                     player.finish();
+                    game.playersPanel.setPlayerState(playerID-1,"Finished");
                     winners.add(player.getName());
                 }
             }
@@ -336,6 +338,7 @@ public class GUISuperTrumpGame {
         System.out.println("The AI players are:");
         for(int i=1; i<(numberOfPlayers);i++){
             players[i]=new AIPlayer(aINames.get(i-1));
+            game.setPlayerName(i-1, aINames.get(i-1));
             System.out.println(aINames.get(i-1));
         }
         // activate all players
@@ -404,6 +407,7 @@ public class GUISuperTrumpGame {
                     game.validate();
                     game.repaint();
                     handMouseListener.setEnabled(true);
+                    deckMouseListener.setEnabled(true);
                 } else {
                     // Get trump category from player
                     trumpDialog.setVisible(true);
@@ -438,6 +442,7 @@ public class GUISuperTrumpGame {
                 }
                 player.deactivate();
                 System.out.println(player.getName() + " passed.\n");
+                game.playersPanel.setPlayerLabel(playerID-1,"Passed");
             } else if (newCard.getCardType().equals("Trump")) {
                 // Activate all payers
                 activateAllPlayers();
@@ -482,11 +487,14 @@ public class GUISuperTrumpGame {
     }
 
 
-
-
     private static void activateAllPlayers(){
+        int i=0;
         for(BasePlayer player:players){
             player.activate();
+            if(i>0) {
+                game.playersPanel.setPlayerLabel(i - 1, "");
+            }
+            i++;
         }
     }
 
@@ -496,6 +504,7 @@ public class GUISuperTrumpGame {
             if(player.isActive()&!player.isFinished()){
                 numberOfActivePlayers++;
             }
+
         }
         return numberOfActivePlayers;
     }

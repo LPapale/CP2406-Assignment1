@@ -6,6 +6,7 @@ import Deck.*;
 import Players.AIPlayer;
 import Players.BasePlayer;
 import Players.GUIHumanPlayer;
+import Players.HumanPlayer;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -57,7 +58,6 @@ public class GUISuperTrumpGame {
     public static ActionListener NewGameActionListener=new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("Yay one part down 999999999 to go");
             numberOfPlayers=menu.getNumberOfPlayers();
             humanPlayerName=menu.getPlayerName();
             System.out.println("Number of players is: "+numberOfPlayers);
@@ -86,6 +86,20 @@ public class GUISuperTrumpGame {
         @Override
         public void mouseClicked(MouseEvent e) {
             GUIHumanPlayer humanPlayer=(GUIHumanPlayer) players[0];
+            // Check if player is the last active player
+            if(numberOfActivePlayers()<=1){
+                System.out.println(humanPlayer.getName()+" won the round!");
+                // Get trump category from player
+                trumpCategory= players[playerID].pickTrumpCategory();
+                System.out.println("Trump category is "+trumpCategory);
+                activateAllPlayers();
+                currentCard=null;
+                //Update current card panel
+                game.currentCardPnl.updateCurrentCard(currentCard);
+                game.validate();
+                game.repaint();
+            }
+
             if(isEnabled()&humanPlayer.isActive()&!humanPlayer.isFinished()) {
                 turnFinished=false;
                 JLabel cardClicked = (JLabel) e.getSource();

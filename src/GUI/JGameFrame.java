@@ -17,7 +17,6 @@ public class JGameFrame extends JFrame {
         setSize(1000,1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(handPnl, BorderLayout.SOUTH);
-
     }
 
     public void addPlayerHand(ArrayList<BaseCard> hand){

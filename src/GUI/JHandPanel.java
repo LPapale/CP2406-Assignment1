@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class JHandPanel extends JPanel {
     GridLayout grid=new GridLayout(1, 0, 5, 0);
     public JHandPanel(){
-            setLayout(grid);
+        setLayout(grid);
         setSize(1000,1000);
     }
 
@@ -36,8 +36,8 @@ public class JHandPanel extends JPanel {
             // Create card label
             JLabel cardLabel=new JLabel(cardImage);
             cardLabel.setName(cardName);
-            // TODO add action listeners
             add(cardLabel);
+            cardLabel.addMouseListener(GUISuperTrumpGame.handMouseListener);
         }
     }
 }

@@ -7,8 +7,10 @@ import Players.AIPlayer;
 import Players.BasePlayer;
 import Players.HumanPlayer;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -40,6 +42,7 @@ public class GUISuperTrumpGame {
         game.setVisible(false);
         trumpDialog=new JChooseTrumpDialog();
         trumpDialog.setVisible(false);
+        handMouseListener.setEnabled(false);
 
 
     }
@@ -64,8 +67,31 @@ public class GUISuperTrumpGame {
             trumpCategory=trumpDialog.getTrumpCategory();
             System.out.println("Player set Trump category to "+trumpCategory);
             trumpDialog.setVisible(false);
+            handMouseListener.setEnabled(true);
         }
     };
+
+    public static NewMouseListener handMouseListener=new NewMouseListener() {
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(isEnabled()) {
+                JLabel cardClicked = (JLabel) e.getSource();
+                System.out.println(cardClicked.getName() + " says Steph is cute");
+            }
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
+
 
     private static void startNewGame(){
         // Create players
@@ -146,13 +172,6 @@ public class GUISuperTrumpGame {
             // Get trump category from player
             trumpDialog.setVisible(true);
         }
-
-            /*/ Ensure a card was played
-        while(currentCard==null){
-            playerID++;
-            currentCard= players[playerID].playCard(trumpCategory);
-        }*/
-
     }
 
     private static void play(BasePlayer player){

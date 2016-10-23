@@ -11,7 +11,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,6 +51,7 @@ public class GUISuperTrumpGame {
         handMouseListener.setEnabled(false);
 
 
+
     }
 
     public static ActionListener NewGameActionListener=new ActionListener() {
@@ -76,6 +76,7 @@ public class GUISuperTrumpGame {
             System.out.println("Player set Trump category to "+trumpCategory);
             trumpDialog.setVisible(false);
             handMouseListener.setEnabled(true);
+            deckMouseListener.setEnabled(true);
         }
     };
 
@@ -97,11 +98,28 @@ public class GUISuperTrumpGame {
                     if(card.getCardType().equals("Play")){
                         setEnabled(false);
                         turnFinished=true;
+                    }else{
+                        activateAllPlayers();
+                        if(card.getCardDetails().equals("The Geologist")){
+                            trumpDialog.setVisible(true);
+                        }else {
+                            trumpCategory = ((TrumpCard) card).getSubtitle();
+                            System.out.println("Trump cat set to "+trumpCategory);
+                        }
                     }
                 }else if(humanPlayer.validCard(trumpCategory,currentCard,card)){
                     if(card.getCardType().equals("Play")){
-                        setEnabled(false);
+                        handMouseListener.setEnabled(false);
+                        deckMouseListener.setEnabled(false);
                         turnFinished=true;
+                    }else{
+                        activateAllPlayers();
+                        if(card.getCardDetails().equals("The Geologist")){
+                            trumpDialog.setVisible(true);
+                        }else {
+                            trumpCategory = ((TrumpCard) card).getSubtitle();
+                            System.out.println("Trump cat set to "+trumpCategory);
+                        }
                     }
                     currentCard=card;
                     humanPlayer.removeFromHand(cardName);
@@ -141,6 +159,39 @@ public class GUISuperTrumpGame {
                 if(turnFinished){
                     AIPlay();
                 }
+            }
+        }
+
+
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+
+        }
+    };
+
+    public static NewMouseListener deckMouseListener=new NewMouseListener() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if(isEnabled()) {
+                // Pick up card if deck still has cards
+                if (deck.length() > 0) {
+                    players[0].setCard(deck.dealCard());
+                }
+                if(deck.length()==0){
+                    game.deckPnl.clear();
+                }
+                players[0].deactivate();
+                handMouseListener.setEnabled(false);
+                deckMouseListener.setEnabled(false);
+                turnFinished = true;
+                game.addPlayerHand(players[0].getHand());
+                AIPlay();
             }
         }
 
@@ -206,11 +257,16 @@ public class GUISuperTrumpGame {
 
 
             playerID++;
-            if(playerID==numberOfPlayers){
+            if(playerID==numberOfPlayers& players[0].isActive()&!players[0].isFinished()){
                 playerID=0;
+            }else if(playerID==numberOfPlayers){
+                playerID=1;
             }
         }
-        handMouseListener.setEnabled(true);
+        if(players[0].isActive()&!players[0].isFinished()) {
+            handMouseListener.setEnabled(true);
+            deckMouseListener.setEnabled(true);
+        }
 
     }
 
@@ -287,6 +343,10 @@ public class GUISuperTrumpGame {
                     playerID=0;
                 }
             }
+            //Update current card panel
+            game.currentCardPnl.updateCurrentCard(currentCard);
+            game.validate();
+            game.repaint();
             handMouseListener.setEnabled(true);
         }else{
             // Get trump category from player
@@ -295,7 +355,6 @@ public class GUISuperTrumpGame {
     }
 
     private static void play(BasePlayer player){
-        System.out.println("in play function");
         // Only play if player has cards remaining.
         if(player.getHandSize()>0) {
             // Get players card
@@ -315,6 +374,9 @@ public class GUISuperTrumpGame {
                 // Pick up card if deck still has cards
                 if(deck.length()>0) {
                     player.setCard(deck.dealCard());
+                }
+                if(deck.length()==0){
+                    game.deckPnl.clear();
                 }
                 player.deactivate();
                 System.out.println(player.getName() + " passed.\n");

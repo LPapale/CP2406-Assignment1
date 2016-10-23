@@ -10,6 +10,7 @@ import Cards.*;
  */
 public class JGameFrame extends JFrame {
     JHandPanel handPnl=new JHandPanel();
+    JDeckPanel deckPnl= new JDeckPanel();
     BorderLayout border =new BorderLayout();
     JCurrentCardPanel currentCardPnl= new JCurrentCardPanel();
 
@@ -20,6 +21,7 @@ public class JGameFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(handPnl, BorderLayout.SOUTH);
         add(currentCardPnl, BorderLayout.CENTER);
+        add(deckPnl, BorderLayout.WEST);
     }
 
     public void addPlayerHand(ArrayList<BaseCard> hand){

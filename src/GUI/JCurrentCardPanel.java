@@ -4,7 +4,6 @@ import Cards.BaseCard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Created by Admin on 23/10/2016.
@@ -18,7 +17,9 @@ public class JCurrentCardPanel extends JPanel {
     public void updateCurrentCard(BaseCard card){
         removeAll();
         if(card==null){
-            setBackground(Color.CYAN);
+            JLabel cardLabel = new JLabel();
+            cardLabel.setBackground(Color.BLUE);
+            add(cardLabel);
         }else {
             String cardName;
             String fileName;

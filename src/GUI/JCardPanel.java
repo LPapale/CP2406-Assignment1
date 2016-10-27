@@ -13,15 +13,19 @@ public class JCardPanel extends JPanel {
     JCurrentCardPanel currentCardPnl= new JCurrentCardPanel();
     JLabel trumpLabel=new JLabel("Trump category is:");
     JLabel trumpCategoryLabel=new JLabel();
+    JPanel bottomPnl=new JPanel();
+    JLabel infoLabel=new JLabel("Welcome");
 
     JCardPanel(){
         setLayout(border);
+        //setBackground(new Color(53,153,255));
         topPnl.setLayout(new FlowLayout());
         topPnl.add(trumpLabel);
         topPnl.add(trumpCategoryLabel);
+        bottomPnl.add(infoLabel);
         add(topPnl, BorderLayout.NORTH);
         add(currentCardPnl, BorderLayout.EAST);
         add(deckPnl, BorderLayout.WEST);
-
+        add(bottomPnl, BorderLayout.SOUTH);
     }
 }

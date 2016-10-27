@@ -26,6 +26,9 @@ public class JAIPlayerPanel extends JPanel{
 
     public void setState(String  state) {
         stateLabel.setText(state);
+        if(state.equals("Finished")){
+            setBackground(Color.YELLOW);
+        }
     }
 
     public void setLabel(String label){

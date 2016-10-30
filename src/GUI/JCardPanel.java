@@ -18,12 +18,13 @@ public class JCardPanel extends JPanel {
 
     JCardPanel(){
         setLayout(border);
-        //setBackground(new Color(53,153,255));
+        // Add label for trump category
         topPnl.setLayout(new FlowLayout());
         topPnl.add(trumpLabel);
         topPnl.add(trumpCategoryLabel);
         bottomPnl.add(infoLabel);
         add(topPnl, BorderLayout.NORTH);
+        // Add deck and current card panel
         add(currentCardPnl, BorderLayout.EAST);
         add(deckPnl, BorderLayout.WEST);
         add(bottomPnl, BorderLayout.SOUTH);

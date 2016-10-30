@@ -23,9 +23,11 @@ public class JGameFrame extends JFrame {
         setSize(1000,1000);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         playersPanel=new JPlayersPanel(numberOfAIPlayers);
+        // Set panel sizes
         playersPanel.setPreferredSize(new Dimension(1000, 200));
         eastPnl.setPreferredSize(new Dimension(200,200));
         westPnl.setPreferredSize(new Dimension(200,200));
+        // Add panels
         panel.add(playersPanel, BorderLayout.NORTH);
         panel.add(cardPnl, BorderLayout.CENTER);
         panel.add(handPnl,BorderLayout.SOUTH);

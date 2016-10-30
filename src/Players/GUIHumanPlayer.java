@@ -2,11 +2,13 @@ package Players;
 
 import Cards.BaseCard;
 import Cards.PlayCard;
+import Cards.TrumpCard;
 
 /**
  * Created by Admin on 23/10/2016.
  */
 public class GUIHumanPlayer extends BasePlayer{
+
     public GUIHumanPlayer(String name){
         super(name, "Human");
     }

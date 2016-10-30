@@ -13,6 +13,7 @@ public class JPlayersPanel extends JPanel{
         setLayout(grid);
         setSize(new Dimension(1000,200));
         playerPanels=new JAIPlayerPanel[numberOfPlayers];
+        // Create a panel for each AIPlayer
         for(int i=0;i<numberOfPlayers;i++){
              JAIPlayerPanel playersPanel=new JAIPlayerPanel();
             playerPanels[i]=playersPanel;
